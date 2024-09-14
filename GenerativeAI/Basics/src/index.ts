@@ -6,7 +6,7 @@ const client = new OpenAI({
 
 async function main() {
     const response = await client.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-3.5-turbo",
         messages: [{
             role: "user",
             content: "Best programming language for Generative AI?"
