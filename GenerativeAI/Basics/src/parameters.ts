@@ -13,6 +13,10 @@ async function main() {
         content: "Tell something cool about India?",
       },
     ],
+    max_tokens: 100,
+    n: 2,
+    frequency_penalty: 1.5,
+    seed: 1000,
   });
   console.log(response.choices);
 }
