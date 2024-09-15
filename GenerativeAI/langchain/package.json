@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r ts-node/register --env-file=.env src/RAG/basic.ts",
+    "start": "node -r ts-node/register --env-file=.env src/RAG/web.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +16,8 @@
     "typescript": "^5.6.2"
   },
   "dependencies": {
+    "@langchain/community": "^0.3.0",
+    "cheerio": "^1.0.0",
     "langchain": "^0.3.2"
   }
 }
