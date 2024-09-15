@@ -1,7 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import { OpenAI } from "openai";
-import { dirname, join } from "path";
-console.log();
+import { join } from "path";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
