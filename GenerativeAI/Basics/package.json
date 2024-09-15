@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "image": "node -r ts-node/register --env-file=.env src/others/image.ts",
     "dev": "node -r ts-node/register --env-file=.env src/test.ts",
     "start": "node -r ts-node/register --env-file=.env src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
