@@ -7,12 +7,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-type DataWithEmbeddings = {
+export type DataWithEmbeddings = {
   input: string;
   embedding: number[];
 };
 
-async function generateEmbeddings(input: string | string[]) {
+export async function generateEmbeddings(input: string | string[]) {
   const response = await openai.embeddings.create({
     model: "text-embedding-3-small",
     input: input,
@@ -22,7 +22,7 @@ async function generateEmbeddings(input: string | string[]) {
 
 // generateEmbeddings(['Cat on the roof', 'Dog on the car']);
 
-function loadJSONData<T>(fileName: string): T {
+export function loadJSONData<T>(fileName: string): T {
   const path = join(__dirname, fileName);
   const rowData = readFileSync(path);
   return JSON.parse(rowData.toString());
@@ -37,7 +37,7 @@ function saveDataToJsonFile(data: any, fileName: string) {
 }
 
 async function main() {
-  const data = loadJSONData<string[]>("data.json");
+  const data = loadJSONData<string[]>("data2.json");
   const embeddings = await generateEmbeddings(data);
   const dataWithEmbeddings: DataWithEmbeddings[] = [];
 
@@ -47,7 +47,7 @@ async function main() {
       embedding: embeddings.data[i].embedding,
     });
   }
-  saveDataToJsonFile(dataWithEmbeddings, "dataWithEmbeddings.json");
+  saveDataToJsonFile(dataWithEmbeddings, "dataWithEmbeddings2.json");
 }
 
 main();
