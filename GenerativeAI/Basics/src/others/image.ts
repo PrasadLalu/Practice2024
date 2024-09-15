@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { createReadStream, writeFileSync } from "fs";
 import { OpenAI } from "openai";
 
 const client = new OpenAI({
@@ -50,6 +50,37 @@ async function generateAdvanceImage() {
   }
 }
 
+async function generateImageVariation() {
+  const response = await client.images.createVariation({
+    image: createReadStream("city.png"),
+    model: "dall-e-2",
+    response_format: "b64_json",
+    n: 1,
+  });
+
+  const rawImage = response?.data[0].b64_json;
+  if (rawImage) {
+    writeFileSync("cityVariation.png", Buffer.from(rawImage, "base64"));
+  }
+}
+
+async function editImage() {
+  const response = await client.images.edit({
+    image: createReadStream("city.png"),
+    mask: createReadStream("cityVariation.png"),
+    prompt: "Add thunderstom to the city",
+    model: "dall-e-2",
+    response_format: "b64_json",
+  });
+
+  const rawImage = response?.data[0].b64_json;
+  if (rawImage) {
+    writeFileSync("cityEdited.png", Buffer.from(rawImage, "base64"));
+  }
+}
+
 // generateFreeImage();
 // generateFreeLocalImage();
-generateAdvanceImage();
+// generateAdvanceImage();
+// generateImageVariation();
+editImage();
